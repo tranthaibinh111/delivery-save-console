@@ -1,0 +1,3 @@
+namespace DeliverySave {
+    interface IService {}
+}
