@@ -1,4 +1,6 @@
-namespace DeliverySave
+using Service;
+
+namespace DeliverySave.Service
 {
     public class TokenService : IService
     {

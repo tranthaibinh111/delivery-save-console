@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DeliverySave
+namespace DeliverySave.Model
 {
     public class Address
     {

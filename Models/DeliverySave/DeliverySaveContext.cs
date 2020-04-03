@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DeliverySave {
+namespace DeliverySave.Model {
     public class DeliverySaveContext: DbContext {
-        public DbSet<Address> Addresses {get; set;}
-
         protected override void OnConfiguring (DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=delivery_save.db");
+
+        public DbSet<Address> Addresses {get; set;}
     }
 }

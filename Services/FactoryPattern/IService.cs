@@ -1,3 +1,3 @@
-namespace DeliverySave {
+namespace Service {
     interface IService {}
 }
