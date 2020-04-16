@@ -58,9 +58,9 @@ namespace DeliverySave
       #endregion
 
       #region Thực hiện đồng bộ hoá dữ liệu address
-      // var addressANNController = new DeliverySaveAddressController();
+      var addressANNController = new DeliverySaveAddressController();
 
-      // addressANNController.syncAddressSQLite();
+      addressANNController.syncAddressSQLite();
       #endregion
 
       Console.ReadLine();

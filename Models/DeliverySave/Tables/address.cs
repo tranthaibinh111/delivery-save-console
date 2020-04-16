@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DeliverySave.Model
 {
-    public class Address
+    public partial class Address
     {
         [Key]
         public string id { get; set; }

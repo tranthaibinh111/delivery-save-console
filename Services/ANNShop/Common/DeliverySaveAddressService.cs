@@ -17,26 +17,26 @@ namespace ANNShop.Service
     {
       using (var con = new ANNShopContext())
       {
-        var address = con.DeliverySaveAddresses
-					.Where(x => x.id == data.id)
+        var address = con.DeliverySaveAddress
+					.Where(x => x.ID == data.ID)
 					.FirstOrDefault();
 
         if (address != null)
         {
-          address.name = data.name;
-          address.pid = data.pid;
-          address.type = data.type;
-          address.region = data.region;
-          address.alias = data.alias;
-          address.is_picked = data.is_picked;
-          address.is_delivered = data.is_delivered;
+          address.Name = data.Name;
+          address.PID = data.PID;
+          address.Type = data.Type;
+          address.Region = data.Region;
+          address.Alias = data.Alias;
+          address.IsPicked = data.IsPicked;
+          address.IsDelivered = data.IsDelivered;
           con.SaveChanges();
 
           return address;
         }
         else
         {
-          con.DeliverySaveAddresses.Add(data);
+          con.DeliverySaveAddress.Add(data);
           con.SaveChanges();
 
           return data;

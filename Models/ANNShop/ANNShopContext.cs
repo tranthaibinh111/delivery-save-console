@@ -4,10 +4,14 @@ namespace ANNShop.Model
 {
   public class ANNShopContext : DbContext
   {
+    public virtual DbSet<DeliverySaveAddress> DeliverySaveAddress { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlServer(@"Data Source=HOANGANH-MACBOO;Initial Catalog=inventorymanagement;User ID=sa;Password=@ANNserver1357;Connection Timeout=300;;Timeout=360");
-
-    public DbSet<DeliverySaveAddress> DeliverySaveAddresses { get; set; }
-
+    {
+      if (!options.IsConfigured)
+      {
+        options.UseSqlServer("data source=192.168.1.77;initial catalog=inventorymanagement;persist security info=True;user id=sa;password=@ANNserver1357;multipleactiveresultsets=True;");
+      }
+    }
   }
 }
