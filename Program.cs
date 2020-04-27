@@ -18,7 +18,7 @@ namespace DeliverySave
   {
     static void Main(string[] args)
     {
-      if (!File.Exists("delivery_save.db"))
+      if (!File.Exists(@"C:\Users\phanhoanganh9x\Documents\delivery-save-console\delivery_save.db"))
       {
         Console.WriteLine("Don't find the delivery_save.db");
         Console.ReadLine();

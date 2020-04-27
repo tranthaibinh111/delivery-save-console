@@ -10,7 +10,7 @@ namespace ANNShop.Model
     {
       if (!options.IsConfigured)
       {
-        options.UseSqlServer("data source=192.168.1.77;initial catalog=inventorymanagement;persist security info=True;user id=sa;password=@ANNserver1357;multipleactiveresultsets=True;");
+        options.UseSqlServer("data source=HOANGANH-MACBOO;initial catalog=inventorymanagement;persist security info=True;user id=sa;password=@ANNserver1357;multipleactiveresultsets=True;");
       }
     }
   }
