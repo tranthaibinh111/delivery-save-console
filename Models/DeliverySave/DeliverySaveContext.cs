@@ -10,7 +10,7 @@ namespace DeliverySave.Model
     {
       if (!options.IsConfigured)
       {
-        options.UseSqlite(@"Data Source=C:\Users\Hoang Anh Phan\Documents\delivery-save-console\delivery_save.db");
+        options.UseSqlite(@"Data Source=C:\delivery\delivery_save.db");
       }
     }
   }

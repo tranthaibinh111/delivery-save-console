@@ -18,47 +18,47 @@ namespace DeliverySave
   {
     static void Main(string[] args)
     {
-      if (!File.Exists(@"C:\Users\Hoang Anh Phan\Documents\delivery-save-console\delivery_save.db"))
+      if (!File.Exists(@"C:\delivery\delivery_save.db"))
       {
         Console.WriteLine("Don't find the delivery_save.db");
         Console.ReadLine();
         return;
       }
 
-      #region Lấy dữ liệu Address từ API Giao Hàng tiết kiệm
-      //bool resultGetProvince = false;
-      //var resultGetDistrict = false;
-      //var resultGetWard = false;
+            #region Lấy dữ liệu Address từ API Giao Hàng tiết kiệm
+            bool resultGetProvince = false;
+            var resultGetDistrict = false;
+            var resultGetWard = false;
 
-      //var addressControll = new AddressController();
+            var addressControll = new AddressController();
 
-      //resultGetProvince = addressControll.getAllProvince();
-      //if (!resultGetProvince)
-      //{
-      //  Console.WriteLine("Error: Address Controller - Get ALL Provice");
-      //  Console.ReadLine();
-      //  return;
-      //}
+            resultGetProvince = addressControll.getAllProvince();
+            if (!resultGetProvince)
+            {
+                Console.WriteLine("Error: Address Controller - Get ALL Provice");
+                Console.ReadLine();
+                return;
+            }
 
-      //resultGetDistrict = addressControll.getAllDistrict();
-      //if (!resultGetDistrict)
-      //{
-      //  Console.WriteLine("Error: Address Controller - Get ALL District");
-      //  Console.ReadLine();
-      //  return;
-      //}
+            resultGetDistrict = addressControll.getAllDistrict();
+            if (!resultGetDistrict)
+            {
+                Console.WriteLine("Error: Address Controller - Get ALL District");
+                Console.ReadLine();
+                return;
+            }
 
-      //resultGetWard = addressControll.getAllWard();
-      //if (!resultGetWard)
-      //{
-      //  Console.WriteLine("Error: Address Controller - Get ALL Ward");
-      //  Console.ReadLine();
-      //  return;
-      //}
-      #endregion
+            resultGetWard = addressControll.getAllWard();
+            if (!resultGetWard)
+            {
+                Console.WriteLine("Error: Address Controller - Get ALL Ward");
+                Console.ReadLine();
+                return;
+            }
+            #endregion
 
-      #region Thực hiện đồng bộ hoá dữ liệu address
-      var addressANNController = new DeliverySaveAddressController();
+            #region Thực hiện đồng bộ hoá dữ liệu address
+            var addressANNController = new DeliverySaveAddressController();
 
       addressANNController.syncAddressSQLite();
       #endregion
