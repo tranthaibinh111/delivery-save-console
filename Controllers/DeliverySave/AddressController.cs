@@ -218,5 +218,101 @@ namespace DeliverySave.Controller
       Console.WriteLine("Ket thuc lay thong tin phuong / xa tu API Giao Hang Tiet Kiem");
       return result;
     }
+
+    public bool getAllHamlet()
+    {
+      var taskProvinces = _addressService.getAllProvince();
+
+      if (taskProvinces == null || taskProvinces.Count == 0)
+      {
+        Console.WriteLine("Hien tai trong database khong co tinh / thanh pho nao het ^-^.");
+        return true;
+      }
+
+      var taskDistricts = new List<Address>();
+      foreach (var province in taskProvinces)
+      {
+        var taskDistrict = _addressService.getAllDistrict(province.id);
+
+        if (taskDistrict != null && taskDistrict.Count > 0)
+          taskDistricts.AddRange(taskDistrict);
+      }
+
+      if (taskDistricts.Count == 0)
+      {
+        Console.WriteLine("Hien tai trong database khong co quan / huyen nao het ^-^.");
+        return true;
+      }
+
+      var wards = new List<Address>();
+      foreach (var province in taskDistricts)
+      {
+        var taskWard = _addressService.getAllWard(province.id);
+
+        if (taskWard != null && taskWard.Count > 0)
+          wards.AddRange(taskWard);
+      }
+
+      if (wards.Count == 0)
+      {
+        Console.WriteLine("Hien tai trong database khong co phuong / xa nao het ^-^.");
+        return true;
+      }
+
+      Console.WriteLine("Bat dau lay thong tin thôn / ấp / xóm / tổ/ ... tu API Giao Hang Tiet Kiem");
+      var result = false;
+      var api = "https://khachhang.giaohangtietkiem.vn/khach-hang/services/list-dia-chi-public?type=17";
+
+      foreach (var ward in wards)
+      {
+        Console.WriteLine(String.Format("Phường / Xã: {0}", ward.alias));
+
+        // Excute API
+        var url = String.Format("{0}&parentId={1}", api, ward.id);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "GET";
+
+        var response = (HttpWebResponse)request.GetResponse();
+
+        if (response != null && response.StatusCode == HttpStatusCode.OK)
+        {
+          try
+          {
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+              var data = JsonConvert.DeserializeObject<List<Address>>(reader.ReadToEnd());
+
+              foreach (var item in data)
+              {
+                var task = _addressService.insert(item);
+
+                if (task != null)
+                  Console.WriteLine("Success: " + JsonConvert.SerializeObject(item));
+                else
+                  Console.WriteLine("Failed: " + JsonConvert.SerializeObject(item));
+              }
+
+              result = true;
+            }
+          }
+          catch (Exception e)
+          {
+            Console.WriteLine("Error: Lay thong tin thôn / ấp / xóm / tổ/ ...");
+            Console.WriteLine(e);
+
+            result = false;
+          }
+        }
+        else
+        {
+          Console.WriteLine("Error: Lay thong tin thôn / ấp / xóm / tổ/ ...");
+          Console.WriteLine("Get API: That bai");
+
+          result = false;
+        }
+      }
+      Console.WriteLine("Ket thuc lay thong tin thôn / ấp / xóm / tổ/ ... tu API Giao Hang Tiet Kiem");
+      return result;
+    }
   }
 }

@@ -9,12 +9,12 @@ namespace Service
     public static T getInstance<T>() where T : new()
     {
       IService instance;
-      bool exist = _instance.TryGetValue(typeof(T).Name, out instance);
+      bool exist = _instance.TryGetValue(typeof(T).FullName, out instance);
 
       if (!exist)
       {
         instance = (IService)new T();
-        _instance.Add(typeof(T).Name, instance);
+        _instance.Add(typeof(T).FullName, instance);
       }
 
       return (T)instance;

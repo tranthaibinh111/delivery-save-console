@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
+using Service;
+
 namespace DeliverySave.Model
 {
   public class DeliverySaveContext : DbContext
@@ -10,7 +12,9 @@ namespace DeliverySave.Model
     {
       if (!options.IsConfigured)
       {
-        options.UseSqlite(@"Data Source=C:\delivery\delivery_save.db");
+        var _config = FactoryService.getInstance<ConfigurationService>();
+
+        options.UseSqlite(_config.getConnectionSQLite());
       }
     }
   }
