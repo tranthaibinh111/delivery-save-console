@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
+using Service;
+
 namespace ANNShop.Model
 {
   public class ANNShopContext : DbContext
@@ -10,7 +12,9 @@ namespace ANNShop.Model
     {
       if (!options.IsConfigured)
       {
-        options.UseSqlServer("data source=NS540206\\ANNSERVER;initial catalog=inventorymanagement;persist security info=True;user id=sa;password=@ANNserver1357;multipleactiveresultsets=True;");
+        var _config = FactoryService.getInstance<ConfigurationService>();
+
+        options.UseSqlServer(_config.getConnectionSQLServer());
       }
     }
   }

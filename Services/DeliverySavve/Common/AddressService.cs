@@ -46,6 +46,18 @@ namespace DeliverySave.Service
         return districts;
       }
     }
+
+    public List<Address> getAllWard(string districtID)
+    {
+      using (var con = new DeliverySaveContext())
+      {
+        var wards = con.Addresses
+          .Where(x => x.pid == districtID)
+          .ToList();
+
+        return wards;
+      }
+    }
     #endregion
 
     #region Khởi tạo
